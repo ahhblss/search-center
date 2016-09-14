@@ -1,5 +1,7 @@
 package com.shaw.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,7 +35,7 @@ public class DateUtil {
 	 * @throws Exception
 	 */
 	public static Date formatString(String str,String format) throws Exception{
-		if(StringUtil.isEmpty(str)){
+		if(StringUtils.isEmpty(str)){
 			return null;
 		}
 		SimpleDateFormat sdf=new SimpleDateFormat(format);

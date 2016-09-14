@@ -1,10 +1,6 @@
 package com.shaw.result;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class ResultSupport<T> implements Result<T> {
 
     private static final long serialVersionUID = 4661096805690919752L;
@@ -13,9 +9,6 @@ public class ResultSupport<T> implements Result<T> {
     private String resultCode;
     private String message;
     private T model;
-
-
-    private List<T> models = new ArrayList<T>();
 
     public String getMessage() {
         return message;
@@ -99,14 +92,6 @@ public class ResultSupport<T> implements Result<T> {
      */
     public void setResultCode(String resultCode) {
         this.resultCode = resultCode;
-    }
-
-    public List<T> getModels() {
-        return models;
-    }
-
-    public void setModels(List<T> models) {
-        this.models = models;
     }
 
     @Override
