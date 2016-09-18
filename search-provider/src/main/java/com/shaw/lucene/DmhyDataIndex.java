@@ -19,23 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DmhyDataIndex {
-    public static final String DEFAULT_PATH = "/search-center/lucene/anime";
+    public static final String DEFAULT_PATH = "/search-center/anime";
     private Directory dir;
     private Analyzer analyzer;
-
-    public DmhyDataIndex(Analyzer analyzer, String path) throws Exception {
-        if (analyzer == null) {
-            this.analyzer = new SmartChineseAnalyzer();
-        } else {
-            this.analyzer = analyzer;
-        }
-        if (StringUtils.isNotBlank(path)) {
-            this.dir = FSDirectory.open(Paths.get(path));
-        } else {
-            this.dir = FSDirectory.open(Paths.get(DEFAULT_PATH));
-        }
-
-    }
 
     public DmhyDataIndex() throws Exception {
         this.analyzer = new SmartChineseAnalyzer();

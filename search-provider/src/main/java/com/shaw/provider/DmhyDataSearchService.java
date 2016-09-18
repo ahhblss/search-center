@@ -8,6 +8,7 @@ import com.shaw.vo.DmhyDataVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Service
 public class DmhyDataSearchService implements IDmhyDataSearchService {
-    @Autowired
+    @Resource
     private DmhyDataIndex dmhyDataIndex;
 
     @Override

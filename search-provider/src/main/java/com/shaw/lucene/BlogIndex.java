@@ -31,7 +31,7 @@ public class BlogIndex {
 
     private Directory dir;
     private Analyzer analyzer;
-    public static final String DEAFULT_PATH = "/search-center/lucene/blog";
+    public static final String DEAFULT_PATH = "/search-center/blog";
 
     public BlogIndex() throws Exception {
         this.analyzer = new SmartChineseAnalyzer();
