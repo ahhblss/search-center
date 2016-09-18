@@ -12,20 +12,32 @@
 													 http://www.springframework.org/schema/util/spring-util.xsd
 													 http://www.springframework.org/schema/task
 													 http://www.springframework.org/schema/task/spring-task.xsd">
-
     <import resource="dubbo-provider.xml"></import>
-
-
-    <!--lucene 索引操作类 -->
-    <bean id="dmhyDataIndex" class="com.shaw.lucene.DmhyDataIndex"></bean>
-    <bean id="blogIndex" class="com.shaw.lucene.BlogIndex"></bean>
-
     <!-- 配置文件 -->
     <util:properties id="config" location="classpath:config.properties"/>
-
     <!-- 自动扫描路径 -->
     <context:component-scan base-package="com.shaw.provider"/>
     <!-- 开启定时轮询 -->
     <task:annotation-driven/>
+
+
+    <!--bean 配置-->
+    <!--lucene 索引操作类 -->
+    <bean id="dmhyDataIndex" class="com.shaw.lucene.DmhyDataIndex"></bean>
+    <bean id="blogIndex" class="com.shaw.lucene.BlogIndex"></bean>
+    <!--handler配置-->
+    <bean id="blogDataHandler" class="com.shaw.handler.BlogDataHandler"></bean>
+    <bean id="dmhyDataHandler" class="com.shaw.handler.DmhyDataHandler"></bean>
+
+
+    <bean id="canalClient" class="com.shaw.canal.CanalClient" init-method="start">
+        <property name="handlers">
+            <map>
+                <entry key="db_blog_t_blog" value-ref="blogDataHandler"/>
+                <entry key="test_dmhy" value-ref="dmhyDataHandler"/>
+            </map>
+        </property>
+    </bean>
+
 
 </beans>

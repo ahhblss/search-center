@@ -5,7 +5,6 @@ import com.shaw.result.Result;
 import com.shaw.result.ResultSupport;
 import com.shaw.service.IDmhyDataSearchService;
 import com.shaw.vo.DmhyDataVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

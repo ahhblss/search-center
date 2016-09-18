@@ -120,4 +120,15 @@ public class DmhyDataVo implements Serializable {
                 + comNum + ", downNum=" + downNum + ", simpleName=" + simpleName + "]";
     }
 
+    public static final String ID_FIELDNAME = "id";
+    public static final String TIME_FIELDNAME = "time";
+    public static final String CLASSI_FIELDNAME = "classi";
+    public static final String TITLE_FIELDNAME = "title";
+    public static final String MAGNETLINK_FIELDNAME = "magnetLink";
+    public static final String SIZE_FIELDNAME = "size";
+    public static final String SEEDNUM_FIELDNAME = "seedNum";
+    public static final String DOWNNUM_FIELDNAME = "downNum";
+    public static final String COMNUM_FIELDNAME = "comNum";
+    public static final String PUBLISHER_FIELDNAME = "publisher";
+    public static final String CREATETIME_FIELDNAME = "create_time";
 }

@@ -106,6 +106,19 @@ public class BlogIndex {
         writer.close();
     }
 
+    public void updateBlogListIndex(List<BlogVo> blogs) throws Exception {
+        IndexWriter writer = getWriter();
+        for (BlogVo blog : blogs) {
+            Document doc = new Document();
+            doc.add(new StringField("id", String.valueOf(blog.getId()), Field.Store.YES));
+            doc.add(new TextField("title", blog.getTitle(), Field.Store.YES));
+            doc.add(new TextField("content", Jsoup.parse(blog.getContent()).text(), Field.Store.YES));
+            doc.add(new LongField("time", blog.getReleaseDate().getTime(), BlogIndex.TIME_TYPE));
+            writer.updateDocument(new Term("id", String.valueOf(blog.getId())), doc);
+        }
+        writer.close();
+    }
+
     /**
      * 删除指定博客的索引
      *
@@ -118,6 +131,19 @@ public class BlogIndex {
         writer.forceMergeDeletes(); // 强制删除
         writer.commit();
         writer.close();
+    }
+
+    public void batchDeleteIndex(List<String> ids) throws Exception {
+        IndexWriter writer = getWriter();
+        try {
+            for (String id : ids) {
+                writer.deleteDocuments(new Term("id", id));
+                writer.forceMergeDeletes();
+            }
+            writer.commit();
+        } finally {
+            writer.close();
+        }
     }
 
     /**

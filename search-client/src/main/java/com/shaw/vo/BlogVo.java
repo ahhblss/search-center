@@ -103,4 +103,14 @@ public class BlogVo implements Serializable {
     public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
+
+    //对应数据库字段名
+    public static final String ID_FIELDNAME = "id";
+    public static final String SUMMARY_FIELDNAME = "summary";
+    public static final String TITLE_FIELDNAME = "title";
+    public static final String RELEASEDATE_FIELDNAME = "releaseDate";
+    public static final String CLICKHIT_FIELDNAME = "clickHit";
+    public static final String CONTENT_FIELDNAME = "content";
+    public static final String TYPEID_FIELDNAME = "typeId";
+    public static final String KEYWORD_FIELDNAME = "keyWord";
 }

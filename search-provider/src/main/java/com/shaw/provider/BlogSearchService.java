@@ -5,7 +5,6 @@ import com.shaw.result.Result;
 import com.shaw.result.ResultSupport;
 import com.shaw.service.IBlogSearchService;
 import com.shaw.vo.BlogVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
