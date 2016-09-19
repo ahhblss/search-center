@@ -19,7 +19,7 @@
     <context:component-scan base-package="com.shaw.provider"/>
     <!-- 开启定时轮询 -->
     <task:annotation-driven/>
-
+    <!--容器启动完毕监听器 -->
     <bean id="startCanalClientListener" class="com.shaw.canal.StartCanalClientListener"></bean>
     <!--bean 配置-->
     <!--lucene 索引操作类 -->

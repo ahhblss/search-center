@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 public class StartCanalClientListener implements ApplicationListener<ContextRefreshedEvent> {
 
 
-    //容器启动完毕，运行cannalClient线程
+    //容器启动完毕，运行canalClient线程
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        //spring 容器初始化后运行canal client  springmvc 容器初始化无视
+        //spring 容器初始化后运行canal client ， springmvc 容器初始化无视
         if (event.getApplicationContext().getDisplayName().equals("Root WebApplicationContext")) {
             final CanalClient canalClient = (CanalClient) event.getApplicationContext().getBean("canalClient");
             canalClient.init();
