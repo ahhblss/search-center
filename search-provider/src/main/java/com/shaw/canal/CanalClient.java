@@ -3,29 +3,24 @@ package com.shaw.canal;
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.common.utils.AddressUtils;
-import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.alibaba.otter.canal.protocol.Message;
-import com.shaw.handler.BaseCanalDataHandler;
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by shaw on 2016/9/14 0014.
  */
 public class CanalClient extends AbstractCanalClient {
-    public static String hostname = AddressUtils.getHostIp();
-    public static Integer port = 11111;
-    public static String destination = "example";
-    public static String username = "";
-    public static String password = "";
+    @Value("#{config['canal.hostname']}")
+    private String hostname;
+    @Value("#{config['canal.port']}")
+    private Integer port;
+    @Value("#{config['canal.username']}")
+    private String username;
+    @Value("#{config['canal.password']}")
+    private String password;
 
-    public CanalClient() {
+    public CanalClient(String destination) {
         super(destination);
     }
 
@@ -34,4 +29,35 @@ public class CanalClient extends AbstractCanalClient {
         this.setConnector(connector);
     }
 
+    public String getHostname() {
+        return hostname;
+    }
+
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

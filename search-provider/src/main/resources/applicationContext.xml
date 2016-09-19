@@ -14,7 +14,8 @@
 													 http://www.springframework.org/schema/task/spring-task.xsd">
     <import resource="dubbo-provider.xml"></import>
     <!-- 配置文件 -->
-    <util:properties id="config" location="classpath:config.properties"/>
+    <context:property-placeholder location="classpath:config.properties"/>
+    <util:properties id="config" location="classpath:config.properties"></util:properties>
     <!-- 自动扫描路径 -->
     <context:component-scan base-package="com.shaw.provider"/>
     <!-- 开启定时轮询 -->
@@ -30,6 +31,7 @@
     <bean id="dmhyDataHandler" class="com.shaw.handler.DmhyDataHandler"></bean>
 
     <bean id="canalClient" class="com.shaw.canal.CanalClient">
+        <constructor-arg value="${canal.destination}"/>
         <property name="handlers">
             <map>
                 <entry key="db_blog_t_blog" value-ref="blogDataHandler"/>

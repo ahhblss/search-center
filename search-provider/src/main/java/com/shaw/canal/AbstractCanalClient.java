@@ -27,10 +27,10 @@ public class AbstractCanalClient {
     };
     protected Thread thread = null;
     protected CanalConnector connector;
-    private Integer batchSize = 1024;
-    private Integer stepLong = 2000;
-    private Map<String, BaseCanalDataHandler> handlers;
-    private String destination;
+    protected Integer batchSize = 1024;
+    protected Integer stepLong = 2000;
+    protected Map<String, BaseCanalDataHandler> handlers;
+    protected String destination;
 
     public AbstractCanalClient(String destination) {
         this(destination, null);

@@ -1,10 +1,8 @@
 package com.shaw.canal;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by tuanzi on 2016/9/19 0019.
