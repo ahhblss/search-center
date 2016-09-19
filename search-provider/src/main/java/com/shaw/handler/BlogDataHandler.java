@@ -6,20 +6,18 @@ package com.shaw.handler;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.shaw.lucene.BlogIndex;
-import com.shaw.utils.DateUtil;
 import com.shaw.utils.TimeUtils;
 import com.shaw.vo.BlogVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Blog 数据处理类
  */
-public class BlogDataHandler extends BaseCanalDataHandler {
+public class BlogDataHandler extends BaseCanalDataHandler<BlogVo> {
     public static final String SCHEMANAME = "db_blog";
     public static final String TABLENAME = "t_blog";
     public static final String HANDLER_KEY = "db_blog_t_blog";
@@ -36,13 +34,13 @@ public class BlogDataHandler extends BaseCanalDataHandler {
     public boolean handlerData(List<CanalEntry.RowData> rowsDatas, CanalEntry.EventType eventType) {
         try {
             if (eventType == CanalEntry.EventType.DELETE) { //过滤删除操作
-                blogIndex.batchDeleteIndex(getIds(rowsDatas));
+                blogIndex.batchDeleteIndex(getBeforeListIds(rowsDatas, BlogVo.ID_FIELDNAME));
             } else if (eventType == CanalEntry.EventType.INSERT) { //过滤插入操作
                 List<BlogVo> insertList = convertToVoList(rowsDatas, false);
                 blogIndex.addBlogListIndex(insertList);
             } else if (eventType == CanalEntry.EventType.UPDATE) { //过滤更新操作
-                List<BlogVo> insertList = convertToVoList(rowsDatas, false);
-                blogIndex.updateBlogListIndex(insertList);
+                List<BlogVo> updateList = convertToVoList(rowsDatas, false);
+                blogIndex.updateBlogListIndex(updateList);
             } else {
                 //其他操作，不不做处理
             }
@@ -53,35 +51,8 @@ public class BlogDataHandler extends BaseCanalDataHandler {
         return true;
     }
 
-
-    private List<BlogVo> convertToVoList(List<CanalEntry.RowData> rowsDatas, boolean isBefore) {
-        List<BlogVo> vos = new ArrayList<BlogVo>();
-        for (CanalEntry.RowData columns : rowsDatas) {
-            BlogVo vo;
-            if (isBefore) {
-                vo = convertToVo(columns.getBeforeColumnsList());
-            } else {
-                vo = convertToVo(columns.getAfterColumnsList());
-            }
-            vos.add(vo);
-        }
-        return vos;
-    }
-
-    private List<String> getIds(List<CanalEntry.RowData> rowsDatas) {
-        List<String> ids = new ArrayList<String>();
-        //只有删除操作需要ids,且删除操作只有 before List
-        for (CanalEntry.RowData columns : rowsDatas) {
-            for (CanalEntry.Column column : columns.getBeforeColumnsList()) {
-                if (BlogVo.ID_FIELDNAME.equals(column.getName())) {
-                    ids.add(column.getValue());
-                }
-            }
-        }
-        return ids;
-    }
-
-    private BlogVo convertToVo(List<CanalEntry.Column> columns) {
+    @Override
+    public BlogVo convertToVo(List<CanalEntry.Column> columns) {
         BlogVo vo = new BlogVo();
         for (CanalEntry.Column column : columns) {
             if (column.getName() != null)

@@ -1,11 +1,16 @@
 package com.shaw.handler;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
+import com.shaw.vo.BlogVo;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/18 0018.
  */
-public abstract class BaseCanalDataHandler {
+public abstract class BaseCanalDataHandler<T> {
     protected String schemeName;
     protected String tableName;
 
@@ -24,5 +29,47 @@ public abstract class BaseCanalDataHandler {
 
 
     public abstract boolean handlerData(java.util.List<com.alibaba.otter.canal.protocol.CanalEntry.RowData> rowsDatas, CanalEntry.EventType eventType);
+
+    public abstract T convertToVo(List<CanalEntry.Column> columns);
+
+    public List<T> convertToVoList(List<CanalEntry.RowData> rowsDatas, boolean isBefore) {
+        List<T> vos = new ArrayList<T>();
+        for (CanalEntry.RowData columns : rowsDatas) {
+            T vo;
+            if (isBefore) {
+                vo = this.convertToVo(columns.getBeforeColumnsList());
+            } else {
+                vo = convertToVo(columns.getAfterColumnsList());
+            }
+            vos.add(vo);
+        }
+        return vos;
+    }
+
+    public Integer parseIntegerValue(String value, Integer defaultValue) {
+        try {
+            if (StringUtils.isBlank(value)) {
+                return 0;
+            } else {
+                return Integer.valueOf(value);
+            }
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public List<String> getBeforeListIds(List<CanalEntry.RowData> rowsDatas, String idFieldName) {
+        List<String> ids = new ArrayList<String>();
+        //只有删除操作需要ids,且删除操作只有 before List
+        for (CanalEntry.RowData columns : rowsDatas) {
+            for (CanalEntry.Column column : columns.getBeforeColumnsList()) {
+                if (idFieldName.equals(column.getName())) {
+                    ids.add(column.getValue());
+                }
+            }
+        }
+        return ids;
+    }
+
 
 }

@@ -20,7 +20,7 @@
     <!-- 开启定时轮询 -->
     <task:annotation-driven/>
 
-
+    <bean id="startCanalClientListener" class="com.shaw.canal.StartCanalClientListener"></bean>
     <!--bean 配置-->
     <!--lucene 索引操作类 -->
     <bean id="dmhyDataIndex" class="com.shaw.lucene.DmhyDataIndex"></bean>
@@ -29,8 +29,7 @@
     <bean id="blogDataHandler" class="com.shaw.handler.BlogDataHandler"></bean>
     <bean id="dmhyDataHandler" class="com.shaw.handler.DmhyDataHandler"></bean>
 
-
-    <bean id="canalClient" class="com.shaw.canal.CanalClient" init-method="start">
+    <bean id="canalClient" class="com.shaw.canal.CanalClient">
         <property name="handlers">
             <map>
                 <entry key="db_blog_t_blog" value-ref="blogDataHandler"/>
@@ -38,6 +37,5 @@
             </map>
         </property>
     </bean>
-
 
 </beans>
