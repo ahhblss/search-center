@@ -115,11 +115,10 @@ public class DmhyDataVo implements Serializable {
 
     @Override
     public String toString() {
-        return "DmhyData [id=" + id + ", time=" + time + ", classi=" + classi + ", title=" + title + ", magnetLink="
-                + magnetLink + ", size=" + size + ", publisher=" + publisher + ", seedNum=" + seedNum + ", comNum="
-                + comNum + ", downNum=" + downNum + ", simpleName=" + simpleName + "]";
+        return "DmhyDataVo [id=" + id + ", time=" + time + ", classi=" + classi + ", title=" + title + ", size=" + size
+                + ", publisher=" + publisher + ", seedNum=" + seedNum + ", comNum=" + comNum + ", downNum=" + downNum
+                + ", magnetLink=" + magnetLink + ", simpleName=" + simpleName + "]";
     }
-
     public static final String ID_FIELDNAME = "id";
     public static final String TIME_FIELDNAME = "time";
     public static final String CLASSI_FIELDNAME = "classi";
