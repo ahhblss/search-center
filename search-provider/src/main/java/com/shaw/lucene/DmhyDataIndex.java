@@ -1,6 +1,7 @@
 package com.shaw.lucene;
 
 import com.alibaba.fastjson.JSONObject;
+import com.shaw.constant.Constants;
 import com.shaw.utils.TimeUtils;
 import com.shaw.vo.DmhyDataVo;
 import org.apache.commons.lang.StringUtils;
@@ -100,18 +101,17 @@ public class DmhyDataIndex {
         }
     }
 
-    public List<DmhyDataVo> searchAnime(String keyword) throws Exception {
+    public List<DmhyDataVo> searchAnime(String keyword, Integer searchNum) throws Exception {
+        if (searchNum == null) {
+            searchNum = Constants.DEAFULT_SEARCH_NUM;
+        }
         IndexReader reader = getReader();
         IndexSearcher searcher = new IndexSearcher(reader);
-
         QueryParser titleParser = new QueryParser("title", this.analyzer);
         Query titleQuery = titleParser.parse(keyword);
-
-        BooleanQuery.Builder builder = new BooleanQuery.Builder();
-        builder.add(titleQuery, BooleanClause.Occur.SHOULD);
         // 按时间和 title 关联度排序 关联度优先
         Sort sort = new Sort(new SortField("title", Type.SCORE), new SortField("time", Type.LONG, true));
-        TopDocs hits = searcher.search(builder.build(), 10, sort);
+        TopDocs hits = searcher.search(titleQuery, searchNum, sort);
         List<DmhyDataVo> datas = new ArrayList<DmhyDataVo>();
         for (ScoreDoc scoreDoc : hits.scoreDocs) {
             Document doc = searcher.doc(scoreDoc.doc);

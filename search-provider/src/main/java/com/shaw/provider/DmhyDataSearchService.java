@@ -19,10 +19,10 @@ public class DmhyDataSearchService implements IDmhyDataSearchService {
     private DmhyDataIndex dmhyDataIndex;
 
     @Override
-    public Result<List<DmhyDataVo>> searchDmhyData(String keyword) {
+    public Result<List<DmhyDataVo>> searchDmhyData(String keyword, Integer searchNum) {
         ResultSupport<List<DmhyDataVo>> resultSupport = new ResultSupport<List<DmhyDataVo>>();
         try {
-            List<DmhyDataVo> voList = dmhyDataIndex.searchAnime(keyword);
+            List<DmhyDataVo> voList = dmhyDataIndex.searchAnime(keyword, searchNum);
             resultSupport.setSuccess(true);
             resultSupport.setModel(voList);
             return resultSupport;

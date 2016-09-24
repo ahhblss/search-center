@@ -19,10 +19,10 @@ public class BlogSearchService implements IBlogSearchService {
     private BlogIndex blogIndex;
 
     @Override
-    public Result<List<BlogVo>> searchBlog(String keyword) {
+    public Result<List<BlogVo>> searchBlog(String keyword,Integer searchNum) {
         ResultSupport<List<BlogVo>> resultSupport = new ResultSupport<List<BlogVo>>();
         try {
-            List<BlogVo> voList = blogIndex.searchBlog(keyword);
+            List<BlogVo> voList = blogIndex.searchBlog(keyword,searchNum);
             resultSupport.setSuccess(true);
             resultSupport.setModel(voList);
             return resultSupport;

@@ -12,5 +12,5 @@ public interface IBlogSearchService {
     /**
      * 根据关键字搜索博客
      */
-    Result<List<BlogVo>> searchBlog(String keyword);
+    Result<List<BlogVo>> searchBlog(String keyword,Integer searchNum);
 }

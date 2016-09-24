@@ -1,5 +1,6 @@
 package com.shaw.lucene;
 
+import com.shaw.constant.Constants;
 import com.shaw.utils.TimeUtils;
 import com.shaw.vo.BlogVo;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -153,7 +154,10 @@ public class BlogIndex {
      * @return
      * @throws Exception
      */
-    public List<BlogVo> searchBlog(String q) throws Exception {
+    public List<BlogVo> searchBlog(String q,Integer searchNum) throws Exception {
+        if (searchNum == null) {
+            searchNum = Constants.DEAFULT_SEARCH_NUM;
+        }
         IndexReader reader = getReader();
         // 创建索引Searcher
         IndexSearcher is = new IndexSearcher(reader);
@@ -173,7 +177,7 @@ public class BlogIndex {
         Sort sort = new Sort(new SortField("title", SortField.Type.SCORE), new SortField("content", SortField.Type.SCORE), new SortField("time", SortField.Type.LONG, true));
 
         // 查询100条记录
-        TopDocs hits = is.search(booleanQuery.build(), 100, sort);
+        TopDocs hits = is.search(booleanQuery.build(), searchNum, sort);
 
         QueryScorer scorer = new QueryScorer(query);
         Fragmenter fragmenter = new SimpleSpanFragmenter(scorer);

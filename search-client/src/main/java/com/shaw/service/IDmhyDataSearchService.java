@@ -11,6 +11,6 @@ import java.util.List;
 public interface IDmhyDataSearchService {
     /**
      * 根据关键字搜索 花园动画资源。
-     * **/
-    Result<List<DmhyDataVo>> searchDmhyData(String keyword);
+     **/
+    Result<List<DmhyDataVo>> searchDmhyData(String keyword, Integer searchNum);
 }
