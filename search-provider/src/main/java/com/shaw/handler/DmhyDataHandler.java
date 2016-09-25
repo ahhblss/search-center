@@ -47,6 +47,7 @@ public class DmhyDataHandler extends BaseCanalDataHandler<DmhyDataVo> {
             } else {
                 //其他操作，不不做处理
             }
+            System.out.println("deal size:"+rowsDatas.size());
         } catch (Exception e) {
             dmhyDataHandlerLogger.error("handler data fail:" + e.getMessage());
             return false;
