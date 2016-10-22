@@ -154,7 +154,7 @@ public class BlogIndex {
      * @return
      * @throws Exception
      */
-    public List<BlogVo> searchBlog(String q,Integer searchNum) throws Exception {
+    public List<BlogVo> searchBlog(String q, Integer searchNum) throws Exception {
         if (searchNum == null) {
             searchNum = Constants.DEAFULT_SEARCH_NUM;
         }
@@ -180,7 +180,7 @@ public class BlogIndex {
         TopDocs hits = is.search(booleanQuery.build(), searchNum, sort);
 
         QueryScorer scorer = new QueryScorer(query);
-        Fragmenter fragmenter = new SimpleSpanFragmenter(scorer);
+        Fragmenter fragmenter = new SimpleSpanFragmenter(scorer, 400);
         SimpleHTMLFormatter simpleHTMLFormatter = new SimpleHTMLFormatter("<b><font color='red'>", "</font></b>");
         Highlighter highlighter = new Highlighter(simpleHTMLFormatter, scorer);
         highlighter.setTextFragmenter(fragmenter);

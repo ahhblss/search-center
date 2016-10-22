@@ -35,7 +35,8 @@
         <property name="handlers">
             <map>
                 <entry key="db_blog_t_blog" value-ref="blogDataHandler"/>
-                <entry key="test_dmhy" value-ref="dmhyDataHandler"/>
+                <!-- 暂时去除dmhy 数据处理 -->
+                <!--<entry key="test_dmhy" value-ref="dmhyDataHandler"/>-->
             </map>
         </property>
     </bean>
