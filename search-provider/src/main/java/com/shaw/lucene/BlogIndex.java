@@ -181,7 +181,7 @@ public class BlogIndex {
 
         QueryScorer scorer = new QueryScorer(query);
         Fragmenter fragmenter = new SimpleSpanFragmenter(scorer, 400);
-        SimpleHTMLFormatter simpleHTMLFormatter = new SimpleHTMLFormatter("<b><font color='red'>", "</font></b>");
+        SimpleHTMLFormatter simpleHTMLFormatter = new SimpleHTMLFormatter("<code color='red'>", "</code>");
         Highlighter highlighter = new Highlighter(simpleHTMLFormatter, scorer);
         highlighter.setTextFragmenter(fragmenter);
         List<BlogVo> blogList = new ArrayList<BlogVo>();
@@ -216,10 +216,10 @@ public class BlogIndex {
                 TokenStream tokenStream = analyzer.tokenStream("content", new StringReader(content));
                 String hContent = highlighter.getBestFragment(tokenStream, content);
                 if (StringUtils.isEmpty(hContent)) {
-                    if (content.length() <= 200) {
+                    if (content.length() <= 500) {
                         blog.setContent(content);
                     } else {
-                        blog.setContent(content.substring(0, 200));
+                        blog.setContent(content.substring(0, 500));
                     }
                 } else {
                     blog.setContent(hContent);
