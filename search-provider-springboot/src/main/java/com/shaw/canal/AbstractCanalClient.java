@@ -77,7 +77,6 @@ public abstract class AbstractCanalClient {
                     long batchId = message.getId();
                     int size = message.getEntries().size();
                     if (batchId == -1 || size == 0) {
-                        logger.info("No data");
                         try {
                             //设置每2秒向 canal instance 拉取一次数据
                             Thread.sleep(stepLong);
