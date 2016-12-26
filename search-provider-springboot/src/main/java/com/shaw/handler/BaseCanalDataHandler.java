@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/9/18 0018.
+ * Created by shaw on
+ * canal数据基本操作类
  */
 public abstract class BaseCanalDataHandler<T> {
     protected String schemeName;
