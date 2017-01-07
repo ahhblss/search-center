@@ -9,6 +9,8 @@ Search Center  Based Lucene<br>
 1.使用canal 获取mysql的binlog日志，获得数据库的实时更新后，修改索引。<br>
 2.使用dubbo对外提供 搜索服务接口。这样其他项目就不需要考虑搜索的实现,且实现了搜索的资源可在不同应用相互共用。<br>
 
+Update：使用spring boot重新实现搜索中心(search-provider-springboot)。原provider停用(search-provider)。
+
 
 
 
